@@ -1,0 +1,96 @@
+/* styles for research page */
+#headerRes{
+    background-image: url('../img/img6.jpg');
+    background-size: cover;
+    background-position: 0 70%;
+    
+}
+
+#customCard img{
+    height: auto;
+    width: 450px;
+    border-radius: 3px;
+    transition: .5s ;
+}
+
+#customContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards por fila */
+    gap: 2rem;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+    #customContainer {
+        grid-template-columns: 1fr; /* 1 card por fila */
+    }
+}
+
+#customCard{
+    border:initial;
+    max-width: 450px;
+    margin: 50px;
+    box-shadow: 5px 5px 20x black;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.intro{
+    height: 50px;
+    width: 450px;
+    padding: 6px;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    background: rgb(27, 27, 27, .5);
+    color: white;
+    transition: .5s ;
+    text-align: start;
+}
+
+#customCard h1{
+    margin: 5px;
+    font-size: 30px;
+}
+
+#customCard h2{
+    margin: 5px;
+    font-size: 18px;
+}
+
+#customCard p{
+    font-size: 15px;
+    margin: 20px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#customCard span{
+    font-weight: bold;
+}
+
+#customCard:hover{
+    cursor: pointer;
+}
+
+#customCard:hover .intro{
+    height: 250px;
+    bottom: 0px;
+    background: black;
+}
+
+#customCard:hover .intro-2{
+    height: 250px;
+    bottom: 0px;
+    background: black;
+}
+
+#customCard:hover p{
+    opacity: 1;
+    visibility: visible;
+}
+
+#customCard:hover img{
+    width: 500px;
+    transition: .5s;
+}

@@ -1,0 +1,113 @@
+{% extends "./intranetBase.html" %} 
+
+{% block contenido %}
+
+<div class="container p-lg-5">
+
+    <div class="row justify-content-center">
+        <div class="col mb-5 text-center" style="max-width: 600px;">
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                <div class="container-fluid  mb-3">
+                    <input type="file" class="upload-box" name="documento" required id="id_documento" >
+                    
+                </div>
+
+                <div>
+                    
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3"><label for="id_categoria" class="col-form-label">Categoria:</label></div>
+                        <div class="col-6">
+                            <select class="form-select"  name="categoria" required id="id_categoria">
+                                <option value="" selected>---------</option>
+                        
+                                <option value="10">Scripts</option>
+                        
+                                <option value="20">Manual</option>
+                            
+                                <option value="30">Protocolo</option>
+                            
+                                <option value="40">Datos</option>
+                        
+                            </select> 
+                        </div>
+                        
+                        
+                    </div>  
+                      
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3"><label for="id_investigador" class="col-form-label">Investigador:</label></div>
+                        <div class="col-6"><input type="text" name="investigador" required id="id_investigador" class="form-control" > </div>
+                        
+                    </div>
+                    
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3"><label for="id_proyecto" class="col-form-label">Proyecto:</label></div>
+                        <div class="col-6"><input type="text" name="proyecto" required id="id_proyecto" class="form-control" ></div>
+                    </div>
+                    
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3"><label for="id_descripcion" class="col-form-label">Descripcion:</label></div>
+                        <div class="col-6"><input type="text" name="descripcion" required id="id_descripcion" class="form-control" ></div>
+                            
+                    </div>
+    
+                </div>
+
+                <div class="container-fluid mt-5">
+                    <input class="btn btn-success w-50" value='Subir Archivo' type="submit">
+                </div>
+
+            </form>            
+            
+        </div>
+        <div class="col mt-5">
+
+            {% if docs %}
+
+                <table class="table" id="tablaDocs" >
+
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Categoria</th>
+                            <th>Investigador</th>
+                            <th>Proyecto</th>
+                            <th>Descripción</th>
+                            <th>Fecha de Creacion</th>
+                            
+
+                        </tr>
+                    </thead> 
+
+                    <tbody>
+    
+                        {% for doc in docs %}
+                            <tr>
+                                <td> <a href="{{doc.documento.url}}" target="_blank">{{doc.documento}}</a> </td>
+                                <td>{{doc.categoria}}</td>
+                                <td>{{doc.investigador}}</td>
+                                <td>{{doc.proyecto}}</td>
+                                <td>{{doc.descripcion}}</td>
+                                <td>{{doc.created_at}}</td>
+                                
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+              
+            {% endif %}
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{% endblock %} 

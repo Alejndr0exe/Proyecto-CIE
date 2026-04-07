@@ -1,0 +1,6 @@
+/* styles for news list page */
+#headerNews {
+    background-image: url('../img/img9.jpg');
+    background-size: cover;
+    background-position: 0 60%;
+}

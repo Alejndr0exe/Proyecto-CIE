@@ -1,0 +1,78 @@
+/* styles for members pages */
+#headerMem{
+    background-image: url('../img/team.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.name{
+    padding: 0;
+    margin: 0;
+    text-align: start;
+    font-size:large ;
+    font-weight: bold;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#containerMember{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#cardMember{
+    all: initial;
+    font-family: 'Noto Sans', sans-serif;
+    width: calc(25% - 30px);
+    margin: 15px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 400ms ease;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 992px) {
+    #cardMember {
+        width: calc(50% - 30px);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #cardMember {
+        width: calc(100% - 30px);
+    }
+}
+
+#cardMember:hover{
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+    transform: translateY(-3%);
+}
+
+#cardMember img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+#cardMember .contenido{
+    padding: 15px;
+    text-align: left;
+}
+
+#cardMember .contenido p{
+    line-height: 1.5;
+    color: #6a6a6a;
+}
+
+#cardMember .contenido .h4{
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #3A7DA4;
+}

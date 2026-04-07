@@ -1,0 +1,253 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Centre of Integrative Ecology - Members</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/new.css' %}">
+    <link rel="stylesheet" href="{% static 'css/members.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  </head>
+  <body>
+
+    <!--Header-->
+    <div class="container-fluid text-center py-2" id="headerNew">
+
+
+          <!--Logo-->
+          <div class="row justify-content-center">
+
+            <div class="col-2 mt-3" style="padding: 0%;">
+              <img src="{% static 'img/logosolo.png' %}" alt="logo" width="80px">
+            </div>
+
+          </div>
+  
+          <!--Navbar-->
+          <div class="row justify-content-center">
+            <div class="col mt-1">
+  
+              <nav class="nav navbar-expand-lg ">
+                <button class="navbar-toggler custom-custom-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list icon-white"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                    <li class="nav-item custom-nav-item me-5">
+                      <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item custom-nav-item me-5">
+                      <a class="nav-link" href="{% url 'research' %}">Research</a>
+                    </li>
+                    <li class="nav-item custom-nav-item me-5">
+                      <a class="nav-link active" aria-current="page" href="{% url 'miembros' %}">Members</a>
+                    </li>
+                    <li class="nav-item custom-nav-item me-5">
+                      <a class="nav-link"  href="{% url 'pub' %}">Publications</a>
+                    </li>
+                    <li class="nav-item custom-nav-item me-5">
+                      <a class="nav-link "  href="{% url 'news' %}">News</a>
+                    </li>
+                  </ul>
+                </div>
+                
+              </nav>
+  
+            </div>                
+              
+          </div>  
+  
+  
+    </div>
+
+    <div class="container-fluid p-5">
+
+      <!--Imagen e info-->
+        <div class="row justify-content-center">
+
+            <div class="col-5 ">
+
+                <img src="{{ member.img.url }}" alt="{{ member.nombre }}" style="margin: 0; width: 500px; max-height: 385px; border-radius: 10px;">
+
+            </div>
+
+            <div class="col-5 ms-4">
+            
+                <h3 class="fw-lighter">{{ member.puesto }}</h3>
+                <h2 style="font-weight: bold;" >{{ member.titulo }} {{ member.nombre }}</h2>
+                <h5 style="font-size:medium;" class="fst-italic" > {{member.academic_rank}}</h5>
+                <div class="d-flex justify-content-end me-5 mt-3">
+                    <h6>{{ member.universidad }}</h6>
+                </div>
+                <hr style="margin-top: 0;" class="me-5 border-2">
+
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-6">
+                    <p style="font-size: 15px;"><strong>Email:</strong> {{member.email}} </p>
+                  </div>
+                  <div class="col-3">
+                    <a href="{{ member.g_scholar }}" target="_blank" class="btn btn-outline-success p-2"> Publications </a>
+                  </div>                 
+                  
+                </div>
+
+                <div class="cuadro-scroll mt-3">
+                    <p style="text-align: left; font-size: 15px;" > {{member.descripcion}} </p>
+                </div>
+                
+
+            </div>
+
+
+        </div>
+
+        <div class="container px-5 py-3 mx-5">
+          
+          <h6 style="font-weight: 600;">AREAS:</h6>
+            {% if member.area %}
+              <a href="{% url 'lineResearch' member.area.id %}">
+                <img src="{{ member.area.icono.url }}" alt="Ícono" width="35" height="35" class="icon-white">{{ member.area.nombre }}
+              </a>
+            {% else %}
+              <span style="color: #999;">Sin área asignada</span>
+            {% endif %}
+
+
+
+        </div>
+      <br><br><br>
+
+      <!--Miembros relacionados-->
+      <div class="container-fluid">
+        <h4 style="color: #1C5744; font-weight: bolder;  letter-spacing: 1px;" >Related Members</h4>
+        <hr class="border border-success border-3 opacity-75 margin-hr">
+
+        <div class="container-fluid mt-5" id="containerMember">
+
+          {% for member in related_members|slice:4 %}
+    
+          <div class="card" id="cardMember">
+            <figure>
+              <img src="{{ member.img.url }}" alt="{{ member.nombre }}">
+            </figure>
+            <div class="contenido">
+              <a href="{% url 'infoMembers' member.id %}" class="h4">{{ member.titulo }} {{ member.nombre }}</a>
+              <p>{{ member.academic_rank }}</p>
+            </div>
+          </div>
+    
+          {% endfor %}  
+          
+    
+        </div>
+
+
+
+      </div>
+      
+
+      
+
+    </div>
+
+    <br><br><br><br><br>
+
+
+   <!--Footer-->
+   <div class="container-fluid text-center px-5 py-5" id="footer">
+
+    <div class="row">
+
+      <div class="col">
+        <div class="row">
+          <img src="{% static 'img/logo.png' %}" alt="logo del cei" style="width: 10rem;" >
+        </div>
+        <div class="row">
+          <img src="{% static 'img/logoutal.png' %}" alt="logo de utal" style="width: 10rem;" class="my-5">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="row sec-footer">
+          Navegation
+        </div>
+        <ul class="list-footer">
+          <li class="mb-2">
+            <a href="#" class="item-footer">Home</a>
+          </li>
+          <li class="mb-2"> 
+            <a href="{% url 'research' %}" class="item-footer">Research</a>
+          </li>
+          <li class="mb-2">
+            <a href="{% url 'miembros' %}" class="item-footer">Members</a>
+          </li>
+          <li class="mb-2">
+            <a href="{% url 'pub' %}" class="item-footer">Publications</a>
+          </li>
+          <li class="mb-2">
+            <a href="{% url 'news' %}" class="item-footer">News</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <div class="row sec-footer">
+          Contact
+        </div>
+
+        <ul class="list-footer">
+          <li class="mb-2 item-footer">
+            contact@cei.cl
+          </li>
+          <li class="mb-2 item-footer"> 
+            Address: Universidad de Talca ¿?
+          </li>
+          
+        </ul>
+
+      </div>
+
+      <div class="col">
+        <div class="row sec-footer">
+          social networks
+        </div>
+
+        <ul class="list-footer">
+          <li class="mb-2 icon-footer">
+            <a href="https://www.instagram.com/" class="list-footer item-footer"> <i class="bi bi-instagram"></i> </a>
+          </li>
+          <li class="mb-2 icon-footer"> 
+            <a href="https://www.tiktok.com/login?lang=es&redirect_url=https%3A%2F%2Fwww.tiktok.com%2Fupload%3Flang%3Des" class="list-footer item-footer"> <i class="bi bi-tiktok"></i> </a>
+          </li>
+          <li class="mb-2 icon-footer"> 
+            <a href="https://twitter.com/i/flow/login" class="list-footer item-footer"> <i class="bi bi-twitter-x"></i> </a>
+          </li>
+          
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="row align-items-end justify-content-end">
+      <div class="col-2">
+        <a href="{% url 'login' %}" target="_blank"  class="item-footer"> Private workspace </a>
+      </div>
+    </div>
+
+   </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

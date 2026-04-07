@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Centre of Integrative Ecology - Publications</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/publications.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        
+    </head>
+    <body>
+
+        <!--Header-->
+        <div class="container-fluid text-center" id="headerPub">
+
+        <!--Logo-->
+        <div class="row justify-content-center"  style="background-color: #00000025;">
+
+          <div class="col-2 mt-3" style="padding: 0%;">
+            <img src="{% static 'img/logotransparente.png' %}" alt="logo" width="150px">
+          </div>
+
+        </div>
+  
+          <!--Navbar-->
+          <div class="row justify-content-center" style="background-color: #00000025;">
+            <div class="col mt-3">
+  
+              <nav class="nav navbar-expand-lg ">
+                <button class="navbar-toggler custom-custom-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list icon-white"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                      <li class="nav-item custom-nav-item me-5">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                      </li>
+                      <li class="nav-item custom-nav-item me-5">
+                        <a class="nav-link" href="{% url 'research' %}">Research</a>
+                      </li>
+                      <li class="nav-item custom-nav-item me-5">
+                        <a class="nav-link"  href="{% url 'miembros' %}">Members</a>
+                      </li>
+                      <li class="nav-item custom-nav-item me-5">
+                        <a class="nav-link active" aria-current="page" href="#">Publications</a>
+                      </li>
+                      <li class="nav-item custom-nav-item me-5">
+                        <a class="nav-link" href="{% url 'news' %}">News</a>
+                      </li>
+                    </ul>
+                </div>
+                
+              </nav>
+  
+            </div>                
+              
+          </div>
+  
+          <!--Titulo-->
+            <div class="row justify-content-center" >
+  
+                <div class="container ">
+                    <h1 class="display-3" id="tituloOthers">
+
+                        Publications
+    
+                    </h1>
+                </div>            
+
+            </div>
+  
+  
+  
+  
+        </div>
+
+        <!--Publications-->
+        <div class="container-fluid text-center mt-5">
+
+            <!--Forms-->
+            <div class="row justify-content-between align-items-center mx-5 px-5">
+
+                <!--Search-->
+                <div class="col-4">
+                  <form role="search">
+        
+                    <div class="row justify-content-start">
+                      <div class="col-10">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                      </div>
+          
+                      <div class="col-2">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                      </div>
+          
+                    </div>
+        
+                  </form>
+                </div>
+
+                <!--Filters-->
+                <div class="col-3">
+
+                    <div class="row justify-content-end">
+
+                        <div class="col-5">
+                            <label for="selectfilter" class="col-form-label"> Filter Type:</label>
+                        </div>
+                        <div class="col-7">
+                            <select class="form-select form-select-sm" id="selectfilter" aria-label="Default select example">
+                              <option selected>All types</option>
+                              <option value="1">Journal Article</option>
+                              <option value="2">Report</option>
+                              <option value="3">Book section</option>
+                            </select>
+                          </div>
+
+                    </div>
+
+
+                </div>
+        
+                <!--Sort by-->
+                <div class="col-3">
+        
+                  <div class="row justify-content-end">
+        
+                    <div class="col-4">
+                      <label for="selectorder" class="col-form-label">Sort by:</label>
+                    </div>
+        
+                    <div class="col-8">
+                      <select class="form-select form-select-sm" id="selectorder" aria-label="Default select example">
+                        <option selected>Most recent</option>
+                        <option value="1">Older</option>
+                        <option value="2">Type</option>
+                      </select>
+                    </div>
+        
+        
+                  </div>  
+        
+                </div>
+        
+            </div>
+
+
+            <div class="container-fluid text-center py-3 mx-2 mt-5">
+              {% for publication in publications %}
+              <div class="row align-items-center justify-content-center my-4 px-5 mx-5 ">
+
+                <div class="row">
+                  <h4 class="col mx-5" style="text-align: start;">
+                      <i class="bi bi-file-earmark-text-fill"></i> <a href="#" style="font-weight: bold; color: #1C5744;" > {{publication.titulo}}({{publication.fecha|date:"Y"}}) </a> {{publication.autors}}
+                      <br>
+                      <em>{{publication.magazine}}</em>
+                  </h4>
+                </div>
+                <div class="row mx-5 mt-2 ">
+                  <a href="{{publication.doi}}" class="col-1 mx-2 btn btn-outline-success">DOI</a>
+                  <a href="{{publication.url}}" class="col-1 mx-2 btn btn-outline-success">URL</a>
+                </div>
+                  
+
+                  
+  
+              </div>
+
+              <hr style="color: #3A7DA4;" class="mx-5  border-1" >
+              {% endfor %}     
+
+            </div>
+
+            
+
+
+        </div>
+
+        <!--Footer-->
+        <div class="container-fluid text-center px-5 py-5" id="footer">
+    
+        <div class="row">
+    
+          <div class="col">
+            <div class="row">
+              <img src="{% static 'img/logo.png' %}" alt="logo del cei" style="width: 10rem;" >
+            </div>
+            <div class="row">
+              <img src="{% static 'img/logoutal.png' %}" alt="logo de utal" style="width: 10rem;" class="my-5">
+            </div>
+          </div>
+    
+          <div class="col">
+            <div class="row sec-footer">
+              Navegation
+            </div>
+            <ul class="list-footer">
+              <li class="mb-2">
+                <a href="#" class="item-footer">Home</a>
+              </li>
+              <li class="mb-2"> 
+                <a href="{% url 'research' %}" class="item-footer">Research</a>
+              </li>
+              <li class="mb-2">
+                <a href="{% url 'miembros' %}" class="item-footer">Members</a>
+              </li>
+              <li class="mb-2">
+                <a href="{% url 'pub' %}" class="item-footer">Publications</a>
+              </li>
+              <li class="mb-2">
+                <a href="{% url 'news' %}" class="item-footer">News</a>
+              </li>
+            </ul>
+          </div>
+    
+          <div class="col">
+            <div class="row sec-footer">
+              Contact
+            </div>
+    
+            <ul class="list-footer">
+              <li class="mb-2 item-footer">
+                contact@cei.cl
+              </li>
+              <li class="mb-2 item-footer"> 
+                Address: Universidad de Talca ¿?
+              </li>
+              
+            </ul>
+    
+          </div>
+    
+          <div class="col">
+            <div class="row sec-footer">
+              social networks
+            </div>
+    
+            <ul class="list-footer">
+              <li class="mb-2 icon-footer">
+                <a href="https://www.instagram.com/" class="list-footer item-footer"> <i class="bi bi-instagram"></i> </a>
+              </li>
+              <li class="mb-2 icon-footer"> 
+                <a href="https://www.tiktok.com/login?lang=es&redirect_url=https%3A%2F%2Fwww.tiktok.com%2Fupload%3Flang%3Des" class="list-footer item-footer"> <i class="bi bi-tiktok"></i> </a>
+              </li>
+              <li class="mb-2 icon-footer"> 
+                <a href="https://twitter.com/i/flow/login" class="list-footer item-footer"> <i class="bi bi-twitter-x"></i> </a>
+              </li>
+              
+            </ul>
+          </div>
+    
+        </div>
+    
+        </div>
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    </body>
+</html>
