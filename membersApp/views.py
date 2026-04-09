@@ -3,17 +3,40 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from membersApp import forms
 from membersApp.models import Members
+from django.db.models import Q 
+
 
 # Create your views here.
 
 def miembros(request):
-
+    busqueda = request.GET.get('q')
+    sort_by = request.GET.get('sort')
     members = Members.objects.all()
-    data = {
-        'members' : members
-    }
 
-    return render(request,"members/members.html", data)
+    if busqueda:
+        members = members.filter(
+            Q(nombre__icontains=busqueda) | 
+            Q(puesto__icontains=busqueda) |
+            Q(area__nombre__icontains=busqueda) |
+            Q(titulo__icontains=busqueda) | 
+            Q(academic_rank__icontains=busqueda) |
+            Q(email__icontains=busqueda) | 
+            Q(universidad__icontains=busqueda) 
+        )
+
+    if sort_by == 'name':
+        members = members.order_by('nombre')
+    elif sort_by == 'rank':
+        members = members.order_by('academic_rank')
+    elif sort_by == 'position':
+        members = members.order_by('-puesto')
+    else:
+        members = members.order_by('nombre')
+
+    data = {
+        'members': members
+    }
+    return render(request, "members/members.html", data)
 
 def addMiembro(request):
     form = forms.addMember()

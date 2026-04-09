@@ -2,15 +2,22 @@ from django.shortcuts import render
 from newsPortal.models import Noticias
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.db.models import Q 
 
 # Create your views here.
 def newsPortal(request):
-    news = Noticias.objects.all().order_by('-fecha')
-    data = {
-        'news' : news
-    }
+    busqueda = request.GET.get('q')
+    object_list = Noticias.objects.all()
 
-    return render(request,"news/news.html", data) 
+    if busqueda:
+        object_list = object_list.filter(
+            Q(encabezado__icontains=busqueda) | 
+            Q(bajada__icontains=busqueda)
+        )
+
+    object_list = object_list.order_by('-fecha')
+    data = { 'news' : object_list }
+    return render(request, "news/news.html", data)
 
 def newCei (request, id):
     timestamp = timezone.now().timestamp()

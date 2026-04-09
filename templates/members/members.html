@@ -89,6 +89,39 @@
 
     <div class="container-fluid mt-5" id="containerMember">
 
+    <div class="container mb-5">
+        <form method="GET" class="row g-2 align-items-end bg-light p-3 rounded shadow-sm border">
+            
+            <div class="col-md-5">
+                <label class="form-label fw-bold text-secondary small">Search Team Members</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-person-search text-muted"></i>
+                    </span>
+                    <input type="text" name="q" value="{{ request.GET.q|default:'' }}" 
+                          class="form-control border-start-0 shadow-none" 
+                          placeholder="Name, position or rank...">
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label fw-bold text-secondary small">Order by</label>
+                <select name="sort" class="form-select shadow-none" onchange="this.form.submit()">
+                    <option value="">Default order</option>
+                    <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Name (A-Z)</option>
+                    <option value="rank" {% if request.GET.sort == 'rank' %}selected{% endif %}>Academic Rank</option>
+                    <option value="position" {% if request.GET.sort == 'position' %}selected{% endif %}>Position / Job Title</option>
+                </select>
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-outline-primary fw-bold">
+                    Filter
+                </button>
+            </div>
+        </form>
+    </div>
+
       {% for member in members %}
 
       <div class="card" id="cardMember">
