@@ -50,6 +50,9 @@ urlpatterns = [
     path('manuals/', manual, name='manuals'),
     path('protocol/', protocol, name='protocol'),
     path('eliminarDoc/<int:id>/', eliminarDoc, name='eliminarDoc'),
+    path('intranet/reservas/json/', get_reservas_json, name='reservas_json'),
+    path('intranet/reservas/crear/', crear_reserva, name='crear_reserva'),
+    path('intranet/reservas/eliminar/<int:id>/', eliminar_reserva, name='eliminar_reserva'),
 ]
 
 if settings.DEBUG:

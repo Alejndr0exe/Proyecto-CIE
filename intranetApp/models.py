@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categoria (models.Model):
@@ -19,6 +20,16 @@ class Documento (models.Model):
     def delete(self):
         self.documento.delete()
         super().delete()
+
+class Reserva(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    responsable = models.CharField(max_length=100) # El nombre editable que pediste
+    inicio = models.DateTimeField()
+    fin = models.DateTimeField()
+    descripcion = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.responsable} ({self.inicio})"
 
 
 

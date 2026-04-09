@@ -1,0 +1,164 @@
+{% extends "./intranet.html" %} 
+{% load static %}
+
+{% block calendar %}
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <div id='calendar'></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalReserva" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Nueva Reserva de Sala</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Responsable</label>
+          <input type="text" id="res_responsable" class="form-control" value="{{ user.get_full_name|default:user.username }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Inicio de Reserva</label>
+          <input type="datetime-local" id="res_inicio" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Término de Reserva</label>
+          <input type="datetime-local" id="res_fin" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Descripción / Motivo</label>
+          <textarea id="res_descripcion" class="form-control" rows="2" placeholder="Ej. Reunión de equipo, calibración de equipos..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarReserva()">Confirmar Reserva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    
+    // Guardamos el calendario en 'window' para poder consultarlo desde guardarReserva()
+    window.reservaCalendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        firstDay: 1,        
+        slotMinTime: '08:00:00',
+        slotMaxTime: '20:00:00',
+        allDaySlot: false,
+        locale: 'es',
+        events: '/intranet/reservas/json/', 
+        
+        dateClick: function(info) {
+            let date = new Date(info.dateStr);
+            let tzOffset = date.getTimezoneOffset() * 60000;
+            let localISOTime = (new Date(date - tzOffset)).toISOString().slice(0, 16);
+            
+            document.getElementById('res_inicio').value = localISOTime;
+            
+            date.setHours(date.getHours() + 1);
+            let localISOTimeFin = (new Date(date - tzOffset)).toISOString().slice(0, 16);
+            document.getElementById('res_fin').value = localISOTimeFin;
+            
+            // Limpiamos la descripción al abrir
+            document.getElementById('res_descripcion').value = '';
+
+            // Usar jQuery para abrir el modal (Método oficial de Bootstrap 4)
+            $('#modalReserva').modal('show');
+        },
+
+        eventClick: function(info) {
+            const userId = "{{ user.id }}";
+            const isStaff = "{{ user.is_staff }}";
+            const ownerId = info.event.extendedProps.owner_id;
+
+            if (userId == ownerId || isStaff === "True") {
+                if (confirm("¿Deseas eliminar la reserva de " + info.event.title + "?")) {
+                    // CORRECCIÓN: Usar fetch silencioso para eliminar
+                    fetch("/intranet/reservas/eliminar/" + info.event.id + "/")
+                    .then(response => {
+                        if(response.ok) {
+                            location.reload();
+                        } else {
+                            alert("Error al eliminar la reserva");
+                        }
+                    });
+                }
+            } else {
+                // Mostramos quién lo reservó y el motivo si existe
+                let msg = "Esta sala ya está reservada por " + info.event.title + ".\n";
+                if (info.event.extendedProps.descripcion) {
+                    msg += "\nMotivo: " + info.event.extendedProps.descripcion;
+                }
+                alert(msg);
+            }
+        }
+    });
+    window.reservaCalendar.render();
+});
+
+function guardarReserva() {
+    const data = {
+        responsable: document.getElementById('res_responsable').value,
+        inicio: document.getElementById('res_inicio').value,
+        fin: document.getElementById('res_fin').value,
+        descripcion: document.getElementById('res_descripcion').value // Capturamos la descripción
+    };
+
+    if (!data.fin || data.fin <= data.inicio) {
+        alert("La hora de término debe ser posterior a la de inicio.");
+        return;
+    }
+
+    // --- CORRECCIÓN: Lógica Anti-Topes ---
+    const nuevoInicio = new Date(data.inicio).getTime();
+    const nuevoFin = new Date(data.fin).getTime();
+    const eventosExistentes = window.reservaCalendar.getEvents();
+
+    let hayTope = false;
+    for (let i = 0; i < eventosExistentes.length; i++) {
+        let evStart = eventosExistentes[i].start.getTime();
+        let evEnd = eventosExistentes[i].end.getTime();
+
+        // Si el nuevo evento empieza antes de que termine el otro, Y termina después de que empiece el otro = CHOCAN
+        if (nuevoInicio < evEnd && nuevoFin > evStart) {
+            hayTope = true;
+            break;
+        }
+    }
+
+    if (hayTope) {
+        alert("¡Error! El horario seleccionado choca con una reserva existente. Por favor, revisa el calendario.");
+        return;
+    }
+    // -------------------------------------
+    
+    fetch('/intranet/reservas/crear/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert("Error del servidor al guardar.");
+        }
+    })
+    .catch(error => alert("Error de red: " + error));
+}
+</script>
+{% endblock %}
