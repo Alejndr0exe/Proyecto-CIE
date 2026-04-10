@@ -148,7 +148,8 @@ def crear_reserva(request):
                 usuario=request.user,
                 responsable=data.get('responsable'),
                 inicio=inicio,
-                fin=fin
+                fin=fin,
+                descripcion=data.get('descripcion', '')
             )
             return JsonResponse({"status": "success"})
         except Exception as e:

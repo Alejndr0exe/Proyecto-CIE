@@ -59,9 +59,25 @@
     color: white;
     margin: 10px;
     text-align: center;
-    background-color: #677c69;
     padding-left: 0;
 }
+
+#astro{
+    background-color: #677c69;
+}
+
+#micro{
+    background-color: #6E9672;
+}
+
+#plant{
+    background-color: #93C998;
+}
+
+#socio{
+    background-color: #A6E3AC;
+}
+
 
 .ovalos:hover{
     box-shadow: 5px 5px 20px rgba(0,0,0,0.4);

@@ -55,6 +55,13 @@
                     <i class="bi bi-house-door-fill"></i>
                     <span>Home</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'intranet' %}#calendar">
+                    <i class="fas fa-fw fa-calendar-alt"></i>
+                    <span>Calendario de Sala</span>
+                </a>
+            </li>
         
         
             <!-- Divider -->
@@ -248,6 +255,17 @@
     <!-- Fullcalendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
+    <style>
+        /* Esto hace que todos los anclajes internos (#) se muevan con suavidad */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Opcional: Ajuste para que el calendario no quede pegado al borde superior */
+        #calendar {
+            scroll-margin-top: 80px; 
+        }
+    </style>
     
 
 </body>
