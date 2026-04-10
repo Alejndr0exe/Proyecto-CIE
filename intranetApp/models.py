@@ -1,5 +1,20 @@
+import unicodedata
 from django.db import models
 from django.contrib.auth.models import User
+
+def ruta_segura(instance, filename):
+    # Separar el nombre de la extensión (.pdf, .docx, etc)
+    ext = filename.split('.')[-1]
+    nombre = filename.rsplit('.', 1)[0]
+    
+    # Quitar tildes y caracteres especiales
+    nombre_limpio = unicodedata.normalize('NFKD', nombre).encode('ascii', 'ignore').decode('utf-8')
+    
+    # Reemplazar espacios por guiones bajos (para evitar URLs rotas)
+    nombre_limpio = nombre_limpio.replace(' ', '_')
+    
+    # Retornar la ruta final segura
+    return f'docs/{nombre_limpio}.{ext}'
 
 # Create your models here.
 class Categoria (models.Model):
@@ -9,7 +24,7 @@ class Categoria (models.Model):
 
 
 class Documento (models.Model):
-    documento = models.FileField(upload_to='docs/', unique=True )
+    documento = models.FileField(upload_to=ruta_segura, unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE) 
     investigador = models.CharField(max_length=50)
     proyecto =  models.CharField(max_length=50, blank=True)
