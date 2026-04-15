@@ -3,6 +3,11 @@
 
 {% block title %}Home{% endblock %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
 {% block header_content %}
   <div class="container-custom">
     <h2 class="slogan">Understanding natural processes <br> requires integrating diverse knowledge <br> from various fields, aiming to <b>study ecological <br> phenomena through a multiscale approach</b></h2>
@@ -18,10 +23,10 @@
         Research lines:
       </h5>
 
-      <a id="astro" href="{% url 'research' %}" class="ovalos py-3 col"><img src="{% static "icons/astroecology.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Astroecology </a>
-      <a id="micro" href="{% url 'research' %}" class="ovalos py-3 col"><img src="{% static "icons/microbial.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Microbial Ecology </a>
-      <a id="plant" href="{% url 'research' %}" class="ovalos py-3 col"><img src="{% static "icons/plant.svg" %}"  alt="Ícono" width="35" height="35" class="icon-white"> Plant Ecology </a>
-      <a id="socio" href="{% url 'research' %}" class="ovalos py-3 col"><img src="{% static "icons/socioecology.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Socioecology </a>
+      <a id="astro" href="{% url 'research' %}#area-1" class="ovalos py-3 col"><img src="{% static "icons/astroecology.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Astroecology </a>
+      <a id="micro" href="{% url 'research' %}#area-2" class="ovalos py-3 col"><img src="{% static "icons/microbial.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Microbial Ecology </a>
+      <a id="plant" href="{% url 'research' %}#area-3" class="ovalos py-3 col"><img src="{% static "icons/plant.svg" %}"  alt="Ícono" width="35" height="35" class="icon-white"> Plant Ecology </a>
+      <a id="socio" href="{% url 'research' %}#area-4" class="ovalos py-3 col"><img src="{% static "icons/socioecology.svg" %}" alt="Ícono" width="35" height="35" class="icon-white"> Socioecology </a>
 
     </div> 
 

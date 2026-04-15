@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     {% block extra_css %}{% endblock %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,12 +25,13 @@
   <body>
 
     <!--Header-->
-    <div class="header-home" style="background-image: url('{% block header_bg %}{% static "img/inicio.webp" %}{% endblock %}');">        
+    <div class="header-home" style="background-image: url('{% block header_img %}{% static "img/inicio.webp" %}{% endblock %}');">        
         
         <nav class="navbar navbar-expand-md w-100 p-0 border-bottom" style="background-color: rgba(0, 0, 0, 0.4);">
           <div class="container p-0"> 
             
             <a class="navbar-brand d-flex align-items-center m-0 p-0" href="/">
+              <img src="{% static 'img/logoutalchico.png' %}" alt="Logo utal" style="width: 40px; height: auto;" class="me-3 my-1">
               <img src="{% static 'img/logosolo.png' %}" alt="Logo CIE" style="width: 50px; height: auto;" class="me-3 my-1">
               <span class="cei fs-5 text-white mb-0" style="line-height: 1;">Centre for Integrative Ecology</span>
             </a>

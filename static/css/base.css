@@ -1,4 +1,67 @@
 /* footer and navigation */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.header-home { 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-custom {
+  flex-grow: 1; 
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin-left: 5%; 
+  margin-top: 0;
+}
+
+.slogan {
+  color: white;
+  line-height: 1.4; 
+  font-weight: 400;
+  text-shadow: 3px 3px 5px rgba(0,0,0,2), 3px 3px 5px rgba(0,0,0,2);
+}
+
+.cei{
+  font-weight: 600;
+  color: white;
+}
+
+.nav-link{
+  color: white; 
+}
+
+.nav-link:hover{
+  color: #002408;
+}
+
+.nav-link:active{
+  color: #002408;
+}
+
+.container-custom img {
+  width: 12rem;
+  height: auto; 
+  margin-right: 10px; 
+}
+
+.custom-nav-hover {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.custom-nav-hover:hover {
+  color: #C2E093 !important;
+}
+
+
+
 #footer {
     background-color: #485c56;;
 }
@@ -167,4 +230,51 @@ body {
 
 .margin-hr {
     margin-top: 0;
+}
+
+@media(max-width: 768px) {
+  .container-custom {
+    padding: 1rem;
+    margin-left: 0; /* Centramos en móviles */
+    text-align: center;
+  }
+
+  .slogan {
+    font-size: 1.5rem; /* Achicamos la fuente para móviles */
+  }
+}
+
+@media (min-width: 1700px){
+  .slogan{
+    font-size: 4rem; /* Fuente gigante para pantallas gigantes */
+  }
+}
+
+
+@media (min-width: 992px){
+  .navbar{
+    max-height: 70px; /* Fuente gigante para pantallas gigantes */
+  }
+}
+
+/* --- AJUSTES DE RESPONSIVIDAD FINA --- */
+
+/* 1. Para el Título del Centro (CIE) */
+@media (max-width: 991px) {
+    .cei {
+        font-size: 1rem !important; /* Achica el título en tablets y móviles */
+    }
+}
+
+@media (max-width: 450px) {
+    .cei {
+        font-size: 0.85rem !important; /* Aún más chico en celulares muy angostos */
+    }
+}
+
+/* 2. Para los links cuando la pantalla está entre 768px y 992px */
+@media (min-width: 768px) and (max-width: 991px) {
+    .custom-nav-item {
+        font-size: 0.9rem !important; /* Reduce la fuente de los links en el modo tablet */
+    }
 }

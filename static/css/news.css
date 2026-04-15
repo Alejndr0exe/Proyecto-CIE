@@ -1,6 +1,9 @@
 /* styles for news list page */
-#headerNews {
-    background-image: url('../img/img9.jpg');
-    background-size: cover;
-    background-position: 0 60%;
+
+.header-home { 
+  min-height: 520px; 
+}
+
+.slogan {
+  font-size: 3.2rem; 
 }

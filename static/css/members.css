@@ -1,9 +1,13 @@
 /* styles for members pages */
-#headerMem{
-    background-image: url('../img/team.webp');
-    background-size: cover;
-    background-position: center;
+
+.header-home { 
+  min-height: 560px; 
 }
+
+.slogan {
+  font-size: 3.2rem; 
+}
+
 
 .name{
     padding: 0;

@@ -1,12 +1,13 @@
 /* styles for research page */
-#headerRes{
-    background-image: url('../img/img6.jpg');
-    background-size: cover;
-    background-position: 0 70%;
-    
+.header-home { 
+  min-height: 520px; 
 }
 
-#customCard img{
+.slogan {
+  font-size: 3.2rem; 
+}
+
+.customCard img{
     height: auto;
     width: 450px;
     border-radius: 3px;
@@ -26,7 +27,7 @@
     }
 }
 
-#customCard{
+.customCard{
     border:initial;
     max-width: 450px;
     margin: 50px;
@@ -48,49 +49,84 @@
     text-align: start;
 }
 
-#customCard h1{
+.customCard h1{
     margin: 5px;
     font-size: 30px;
 }
 
-#customCard h2{
+.customCard h2{
     margin: 5px;
     font-size: 18px;
 }
 
-#customCard p{
+.customCard p{
     font-size: 15px;
     margin: 20px;
     visibility: hidden;
     opacity: 0;
 }
 
-#customCard span{
+.customCard span{
     font-weight: bold;
 }
 
-#customCard:hover{
+.customCard:hover{
     cursor: pointer;
 }
 
-#customCard:hover .intro{
+.customCard:hover .intro{
     height: 250px;
     bottom: 0px;
     background: black;
 }
 
-#customCard:hover .intro-2{
+.customCard:hover .intro-2{
     height: 250px;
     bottom: 0px;
     background: black;
 }
 
-#customCard:hover p{
+.customCard:hover p{
     opacity: 1;
     visibility: visible;
 }
 
-#customCard:hover img{
+.customCard:hover img{
     width: 500px;
     transition: .5s;
+}
+
+/* Clase que imita el hover de la tarjeta */
+.card-active {
+    cursor: pointer;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4) !important;
+    transform: translateY(-3%) !important;
+    transition: all 400ms ease;
+}
+
+/* Forzamos que la info interna (intro) sea visible */
+.card-active .intro {
+    height: 250px;
+    bottom: 0px;
+    background: black;
+    width: 450px;
+    padding: 6px;
+    box-sizing: border-box;
+    position: absolute;
+    color: white;
+    transition: .5s ;
+    text-align: start;
+    height: auto !important; /* O el valor que uses para mostrar el texto */
+    opacity: 1 !important;
+    bottom: 0 !important;
+}
+
+.card-active p{
+    opacity: 1;
+    visibility: visible;
+}
+
+.card-active img {
+    width: 500px;
+    transition: .5s;    
 }
