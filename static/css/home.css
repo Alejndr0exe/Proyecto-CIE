@@ -1,8 +1,33 @@
 /* styles for home page */
-.header-home{ 
-  height: 620px;
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.header-home { 
+  min-height: 620px; 
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-custom {
+  flex-grow: 1; 
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin-left: 5%; 
+  margin-top: 0;
+}
+
+.slogan {
+  color: white;
+  font-size: 2.2rem; 
+  line-height: 1.4; 
+  font-weight: 400;
+  text-shadow: 0px 0px 10px rgba(0,0,0,2), 2px 2px 5px rgba(0,0,0,2);
 }
 
 .icon-white{
@@ -32,23 +57,12 @@
   color: #002408;
 }
 
-.container-custom {
-  display: flex; 
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  margin-top: 6rem;
-  padding: 2rem;
-}
+
 
 .container-custom img {
   width: 12rem;
   height: auto; 
   margin-right: 10px; 
-}
-
-.slogan{
-  color: white;
 }
 
 .ovalos{
@@ -85,65 +99,66 @@
 }
 
 
-@media(max-width:500px) {
-  .nav-link{
-    margin-right: 10rem;
-  }
+/* --- ESTILOS EXTRA PARA EL NAVBAR DEL HOME --- */
+.custom-nav-hover {
+  position: relative;
+  transition: color 0.3s ease;
+}
 
-  ul{
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+.custom-nav-hover:hover {
+  color: #C2E093 !important;
+}
 
-  .header-home{ 
-  height: 820px;
 
-  .container-custom{
-    flex-direction: column;
+/* --- MEDIA QUERIES --- */
+
+@media(max-width: 768px) {
+  .container-custom {
+    padding: 1rem;
+    margin-left: 0; /* Centramos en móviles */
     text-align: center;
-  }
-
-  .container-custom img {
-    margin-right: 0;
-    margin-bottom: 1rem;
   }
 
   .slogan {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.5rem; /* Achicamos la fuente para móviles */
+  }
+
+  .ovalos {
+    margin: 10px auto;
+    width: 80%; 
   }
 }
 
-
-}
-
-@media(max-width:768px) {
-  .container{
-    align-items: center;
-    text-align: center;
-  }
-
-  .container-custom img {
-    width: 7rem
-  }
-  
-  .ovalos{
-    margin-inline: 25px;
-  }
-
-}
-
-@media (min-width:1700px){
-
-  .container-custom {
-    padding: 5rem;
-    padding-left: 2rem;
-    margin-top: 8rem;
-    width: 75%;
-  }
-
+@media (min-width: 1700px){
   .slogan{
-    font-size: 70px;
-    margin-left: 2rem; 
+    font-size: 4rem; /* Fuente gigante para pantallas gigantes */
   }
+}
 
+@media (min-width: 992px){
+  .navbar{
+    max-height: 70px; /* Fuente gigante para pantallas gigantes */
+  }
+}
+
+/* --- AJUSTES DE RESPONSIVIDAD FINA --- */
+
+/* 1. Para el Título del Centro (CIE) */
+@media (max-width: 991px) {
+    .cei {
+        font-size: 1rem !important; /* Achica el título en tablets y móviles */
+    }
+}
+
+@media (max-width: 450px) {
+    .cei {
+        font-size: 0.85rem !important; /* Aún más chico en celulares muy angostos */
+    }
+}
+
+/* 2. Para los links cuando la pantalla está entre 768px y 992px */
+@media (min-width: 768px) and (max-width: 991px) {
+    .custom-nav-item {
+        font-size: 0.9rem !important; /* Reduce la fuente de los links en el modo tablet */
+    }
 }
