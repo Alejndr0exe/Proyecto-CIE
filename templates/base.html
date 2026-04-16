@@ -2,10 +2,11 @@
 
     {% load static %}
 
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'img/logosolo.png' %}">
     <title>CIE - {% block title %}{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,9 +116,12 @@
 
     </div>
 
-    <div class="row align-items-end justify-content-end m-0">
-      <div class="col-2">
-        <a href="{% url 'login' %}" target="_blank"  class="item-footer"> Private workspace </a>
+    <div class="row align-items-end justify-content-between m-0">
+      <div class="col-auto">
+        <p class="dev-signature mb-0">Desarrollado por <a href="https://www.linkedin.com/in/vicenteg040504/" target="_blank">Vicente González</a></p>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'login' %}" target="_blank" class="workspace"> Private workspace </a>
       </div>
     </div>
 

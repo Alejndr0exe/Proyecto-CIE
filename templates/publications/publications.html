@@ -53,20 +53,20 @@
             </div>
 
 
-            <div class="container-fluid text-center py-3 mx-2 mt-5">
+            <div class="container-fluid text-center py-3 mx-lg-2 mt-5">
               {% for publication in publications %}
-              <div class="row align-items-center justify-content-center my-4 px-5 mx-5 ">
+              <div class="row align-items-center justify-content-center my-4 px-lg-5 mx-lg-5 ">
 
                 <div class="row">
-                  <h4 class="col mx-5" style="text-align: start;">
-                      <i class="bi bi-file-earmark-text-fill"></i> <a href="#" style="font-weight: bold; color: #1C5744;" > {{publication.titulo}}({{publication.fecha|date:"Y"}}) </a> {{publication.autors}}
+                  <h4 class="col mx-lg-5" style="text-align: start;">
+                      <i class="bi bi-file-earmark-text-fill"></i> <a href="{{publication.url}}" target="_blank" style="font-weight: bold; color: #1C5744;" > {{publication.titulo}}({{publication.fecha|date:"Y"}}) </a> {{publication.autors}}
                       <br>
                       <em>{{publication.magazine}}</em>
                   </h4>
                 </div>
                 <div class="row mx-5 mt-2 ">
-                  <a href="{{publication.doi}}" class="col-1 mx-2 btn btn-outline-success">DOI</a>
-                  <a href="{{publication.url}}" class="col-1 mx-2 btn btn-outline-success">URL</a>
+                  <a href="{{publication.doi}}" target="_blank" class="col-1 mx-2 btn btn-outline-success">DOI</a>
+                  <a href="{{publication.url}}" target="_blank" class="col-1 mx-2 btn btn-outline-success">URL</a>
                 </div>
                   
 
